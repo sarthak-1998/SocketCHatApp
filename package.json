@@ -9,7 +9,8 @@
   "author": "Sanket",
   "license": "ISC",
   "dependencies": {
-    "socket.io": "*",
-    "express": "*"
+    "express": "*",
+    "node-rest-client": "^3.1.0",
+    "socket.io": "*"
   }
 }

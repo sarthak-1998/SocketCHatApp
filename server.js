@@ -2,6 +2,7 @@ var express=require('express');
 var app=express();
 var server = require('http').createServer(app);
 var io=require('socket.io').listen(server);
+var Client = require('node-rest-client').Client;
 
 users=[];
 connections = [];
@@ -26,7 +27,17 @@ io.on('connection',function(socket){ //<-new syntax from docs
   });
   //send message
   socket.on('send message',function(data){
+    console.log("m here");
     console.log(data);
+    var client = new Client();
+ var args={
+       data:{message: data},
+        headers:{"Content-Type": "application/json" }
+     }
+     client.post("http://localhost:3000/chats/save_chat",args, function(response){
+console.log(response);
+     });
+
     //  io.emit('new message',{msg: data}); <- also valid
     io.sockets.emit('new message',{msg: data});
   });
